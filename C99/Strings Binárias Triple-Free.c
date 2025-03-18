@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-// Verifica se uma string é "triple-free"
 int isTripleFree(char *s, int len) {
     for (int size = 1; size * 3 <= len; size++) {
         for (int i = 0; i <= len - 3 * size; i++) {
@@ -18,7 +17,6 @@ int isTripleFree(char *s, int len) {
     return 1;
 }
 
-// Função recursiva para gerar combinações e contar as válidas
 void generate(int pos, char *pattern, char *current, int len, int *count) {
     if (pos == len) {
         current[pos] = '\0';
@@ -60,3 +58,17 @@ int main() {
 
     return 0;
 }
+
+
+//Explicação do código:
+//Função isTripleFree:
+//Verifica se a string contém uma subsequência formada por uma repetição de uma string (SSS).
+//Retorna 1 se for "triple-free", caso contrário, retorna 0.
+
+//Função generate:
+//Gera todas as combinações binárias possíveis substituindo os asteriscos *.
+//Checa cada combinação para ver se é "triple-free" e incrementa o contador.
+
+//Entrada e saída:
+//O programa lê o tamanho N e o padrão P.
+//Para cada padrão, calcula o número de strings binárias que são "triple-free" e exibe o resultado.
