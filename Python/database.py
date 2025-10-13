@@ -12,7 +12,6 @@ class UserDB:
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             
-            # Users table
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS users (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,7 +23,6 @@ class UserDB:
                 )
             ''')
             
-            # Create default admin user if not exists
             admin_hash = self.hash_password('admin123')
             cursor.execute('''
                 INSERT OR IGNORE INTO users (username, password_hash, is_admin) 
@@ -67,7 +65,7 @@ class UserDB:
                 conn.commit()
                 return True
         except sqlite3.IntegrityError:
-            return False  # Username already exists
+            return False
     
     def verify_user(self, username, password):
         """Verify user credentials"""
