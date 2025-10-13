@@ -1,0 +1,11 @@
+auth_system/
+├── app.py
+├── database.py
+├── templates/
+│   ├── base.html
+│   ├── admin_login.html
+│   ├── admin_dashboard.html
+│   ├── user_login.html
+│   └── access_denied.html
+├── requirements.txt
+└── README.md
