@@ -3,10 +3,9 @@ import database
 import functools
 
 app = Flask(__name__)
-app.secret_key = 'your-secret-key-here'  # Change this in production!
+app.secret_key = 'your-secret-key-here' 
 db = database.UserDB()
 
-# Decorators
 def login_required(f):
     @functools.wraps(f)
     def decorated_function(*args, **kwargs):
@@ -23,12 +22,10 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# Routes
 @app.route('/')
 def index():
     return redirect(url_for('user_login'))
 
-# User Login Interface
 @app.route('/login', methods=['GET', 'POST'])
 def user_login():
     if request.method == 'POST':
@@ -50,7 +47,6 @@ def user_login():
     
     return render_template('user_login.html')
 
-# Admin Login Interface
 @app.route('/admin/login', methods=['GET', 'POST'])
 def admin_login():
     if request.method == 'POST':
@@ -68,14 +64,12 @@ def admin_login():
     
     return render_template('admin_login.html')
 
-# Admin Dashboard
 @app.route('/admin/dashboard')
 @admin_required
 def admin_dashboard():
     users = db.get_all_users()
     return render_template('admin_dashboard.html', users=users)
 
-# User Management
 @app.route('/admin/users/add', methods=['POST'])
 @admin_required
 def add_user():
@@ -126,12 +120,10 @@ def get_user(user_id):
         })
     return jsonify({'error': 'User not found'}), 404
 
-# Access Denied
 @app.route('/access-denied')
 def access_denied():
     return render_template('access_denied.html')
 
-# Logout
 @app.route('/logout')
 def logout():
     session.clear()
